@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="361dp"
+    android:height="205dp"
+    android:viewportWidth="361"
+    android:viewportHeight="205">
+    <group
+        android:translateX="-10"
+        android:translateY="-6">
+        <!-- Main Ticket Body: Cleaned and rounded path data -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:strokeColor="#E5E7EB"
+            android:strokeWidth="0.5"
+            android:pathData="M356,6C357,14 363,21 371,23V194C363,196 357,203 356,211H23C22,203 17,197 10,194V23C17,20 22,14 23,6H356Z" />
+        
+        <!-- Decorative Dots: Simplified rounded paths (High performance) -->
+        <path
+            android:fillColor="#E5E7EB"
+            android:pathData="M22,174h2v6h-2z M355,174h2v6h-2z M22,159h2v8h-2z M355,159h2v8h-2z M22,143h2v8h-2z M355,143h2v8h-2z M22,128h2v8h-2z M355,128h2v8h-2z M22,112h2v8h-2z M355,112h2v8h-2z M22,97h2v8h-2z M355,97h2v8h-2z M22,81h2v8h-2z M355,81h2v8h-2z M22,66h2v8h-2z M355,66h2v8h-2z M22,51h2v8h-2z M355,51h2v8h-2z M22,39h2v5h-2z M355,39h2v5h-2z" />
+    </group>
+</vector>

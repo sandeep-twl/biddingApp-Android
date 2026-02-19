@@ -8,7 +8,7 @@ val PrimaryBlueDark = Color(0xFF1E40AF)
 val PrimaryBlueLight = Color(0xFF3B82F6)
 
 // Category badge
-val CategoryOrange = Color(0xFFF97316)
+val CategoryOrange = Color(0xFFF46536)
 val CategoryOrangeLight = Color(0xFFFED7AA)
 
 // Background colors
