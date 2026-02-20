@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.biddingapp.R
+import com.biddingapp.data.Bid
 import com.biddingapp.data.BidRepository
 import com.biddingapp.ui.components.BiddingTopBar
 import com.biddingapp.ui.components.BidCard
@@ -28,6 +29,7 @@ import com.biddingapp.ui.theme.*
 fun BidsListScreen(
     modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit = {},
+    onBidClick: (Bid) -> Unit = {}
 ) {
     val bids = remember { BidRepository.getSampleBids() }
     var isSearchActive by remember { mutableStateOf(false) }
@@ -118,7 +120,10 @@ fun BidsListScreen(
                     items = bids,
                     key = { it.id }
                 ) { bid ->
-                    BidCard(bid = bid)
+                    BidCard(
+                        bid = bid,
+                        onClick = { onBidClick(bid) }
+                    )
                 }
             }
         }

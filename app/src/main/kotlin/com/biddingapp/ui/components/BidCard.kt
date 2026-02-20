@@ -2,17 +2,21 @@ package com.biddingapp.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
+
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -23,15 +27,23 @@ import androidx.compose.ui.unit.sp
 import com.biddingapp.data.Bid
 import com.biddingapp.ui.theme.*
 import java.time.format.DateTimeFormatter
+import com.biddingapp.R as AppR
 
 @Composable
 fun BidCard(
+    modifier: Modifier = Modifier,
     bid: Bid,
-    modifier: Modifier = Modifier
+    isDetailScreen: Boolean = false,
+    onClick: () -> Unit = {},
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = LocalIndication.current,
+                onClick = onClick
+            )
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .graphicsLayer(
                 shadowElevation = 8f,
@@ -43,7 +55,7 @@ fun BidCard(
     ) {
         // SVG Ticket Background
         Image(
-            painter = painterResource(id = R.drawable.ic_bg_bid_card),
+            painter = painterResource(id = AppR.drawable.ic_bg_bid_card),
             contentDescription = null,
             modifier = Modifier.matchParentSize(),
             contentScale = ContentScale.FillBounds
@@ -62,13 +74,13 @@ fun BidCard(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
-                        painter = painterResource(id = R.drawable.al_nazar_logo),
+                        painter = painterResource(id = AppR.drawable.al_nazar_logo),
                         contentDescription = "Al Nassar",
                         modifier = Modifier.size(36.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Image(
-                        painter = painterResource(id = R.drawable.ic_al_hilal),
+                        painter = painterResource(id = AppR.drawable.ic_al_hilal),
                         contentDescription = "Al Hilal",
                         modifier = Modifier.size(30.dp)
                     )
@@ -83,7 +95,7 @@ fun BidCard(
                         ),
                         style = MaterialTheme.typography.bodySmall,
                         color = TextSecondary,
-                        maxLines = 1
+                        maxLines = 1,
                     )
 
                     Text(
@@ -98,19 +110,17 @@ fun BidCard(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // High Performance Cached Dashed Separator
+            // High Performance Cached Separator
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(1.dp)
                     .drawWithCache {
-                        val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
                         onDrawBehind {
                             drawLine(
-                                color = DividerColor.copy(alpha = 0.3f),
+                                color = DividerColor.copy(alpha = 0.7f),
                                 start = Offset(0f, 0.5f),
                                 end = Offset(size.width, 0.5f),
-                                pathEffect = pathEffect,
                                 strokeWidth = 1.dp.toPx()
                             )
                         }
@@ -182,6 +192,25 @@ fun BidCard(
                     VerticalDivider()
                     SeatingColumn("Seat", bid.seat.toString())
                 }
+            }
+        }
+
+        // Ongoing Tag at Top Right
+        if (isDetailScreen) {
+            Surface(
+                shape = RoundedCornerShape(bottomStart = 12.dp, topEnd = 16.dp), // Angled for the corner
+                color = Color(0xFFE8F5E9), // Light green background
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(end = 6.dp, top = 6.dp) // Slight inset from the edge
+            ) {
+                Text(
+                    text = "Ongoing",
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color(0xFF2E7D32), // Dark green text
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }

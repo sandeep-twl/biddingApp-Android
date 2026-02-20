@@ -76,6 +76,7 @@ fun BiddingTopBar(
                 val icon = when (rightAction.lowercase()) {
                     "search" -> painterResource(id = R.drawable.ic_search)
                     "download" -> painterResource(id = R.drawable.ic_download)
+                    "share" -> painterResource(id = R.drawable.ic_share)
                     else -> null
                 }
                 

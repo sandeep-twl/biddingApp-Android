@@ -13,6 +13,7 @@ val CategoryOrangeLight = Color(0xFFFED7AA)
 
 // Background colors
 val BackgroundLight = Color(0xFFF8FAFC)
+val LightBlueBackground = Color(0xFFF4FBFF)
 val SurfaceWhite = Color(0xFFFFFFFF)
 
 // Text colors
